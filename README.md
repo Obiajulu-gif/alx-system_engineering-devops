@@ -1,1 +1,1 @@
-this is 0x00. Shell, basics
+i am working now
