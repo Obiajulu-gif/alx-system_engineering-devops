@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# Get the current working directory
+current_dir=$(pwd)
+
+# Create a temporary variable to store the files to be moved
+files_to_move=$(find $current_dir -type f -iname "*[A-Z]*")
+
+# Create the destination directory if it does not exist
+mkdir -p /tmp/u
+
+# Move the files to the destination directory
+for file in $files_to_move; do
+  mv "$file" /tmp/u
+done
