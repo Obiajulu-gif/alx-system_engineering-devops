@@ -2,4 +2,9 @@
 
 # Script that display the current directory in a list format
 
-ls -1
+for file in *; do
+    if [ -f "$file" ] && [[ "$file" != .* ]]; then
+        filename="${file#*-}"
+        echo "$filename"
+    fi
+done
