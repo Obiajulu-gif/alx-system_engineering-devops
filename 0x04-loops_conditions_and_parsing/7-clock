@@ -11,7 +11,7 @@ while [ $hour -le 12 ]; do
     
     minute=1
     while [ $minute -le 60 ]; do
-        echo $minute
+        echo "$minute"
         minute=$((minute + 1))
     done
     
