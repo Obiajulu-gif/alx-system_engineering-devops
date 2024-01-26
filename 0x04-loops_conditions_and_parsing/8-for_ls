@@ -2,7 +2,4 @@
 
 # Script that display the current directory in a list format
 
-list=$(ls -1)
-for i in $list; do
-    echo "$i"
-done
+ls -1
