@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+#Script to write FIZZBUZZ game 
+
+for ((i=1; i<100; i++)); do
+    if ((i % 3 == 0 && i % 5 == 0)); then
+        echo "FizzBuzz"
+        continue
+    elif ((i % 3 == 0)); then
+        echo "Fizz"
+        continue
+    elif ((i % 5 == 0)); then
+        echo "Buzz"
+        continue
+    else
+        echo $i
+        continue
+    fi
+    echo $i
+done
