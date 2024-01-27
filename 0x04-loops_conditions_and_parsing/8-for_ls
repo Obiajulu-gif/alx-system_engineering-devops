@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-
 # Script that display the current directory in a list format
 
 for file in *; do
