@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# script that stops 4-to_infinity_and_beyond process using kill process
+
+pid=$(pgrep -f "4-to_infinity_and_beyond")
+if [ -n "$pid" ]; then
+    kill "$pid"
+else
+    echo "Not found"
+fi
