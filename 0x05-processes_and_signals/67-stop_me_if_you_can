@@ -5,4 +5,4 @@
 # I am invincible!!! when receiving a SIGTERM signal
 
 
-kill -f "7-highlander"
+pkill -f "7-highlander"
