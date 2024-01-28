@@ -4,10 +4,5 @@
 # With a sleep 2 in between each iteration
 # I am invincible!!! when receiving a SIGTERM signal
 
-pid=$(pgrep -f "7-highlander")
-if [ -n "$pid" ]; then
-    echo "Stopping the process with PID $pid"
-    kill "$pid"
-else
-    echo "Process 67-stop_me_if_you_can not found"
-fi
+
+pkill -f "7-highlander"
