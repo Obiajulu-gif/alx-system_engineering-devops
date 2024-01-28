@@ -1,8 +1,4 @@
 #!/usr/bin/env bash
-# script that displays:
-# To infinity and beyond indefinitely
-# With a sleep 2 in between each iteration
-# I am invincible!!! when receiving a SIGTERM signal
-
+# script that stop 7-highlander process.
 
 pkill -f "7-highlander"
