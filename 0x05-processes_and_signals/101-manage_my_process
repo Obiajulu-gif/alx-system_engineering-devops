@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# script which is a simple wrapper that allows
+# the user to interact with the manage_my_process script by providing the desired action as a command-line argument.
+
+if [ "$#" -ne 1 ]; then
+    echo "Usage: $0 {start|stop|restart}"
+    exit 1
+fi
+
+sudo ./manage_my_process "$1"
