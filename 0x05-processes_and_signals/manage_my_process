@@ -3,7 +3,6 @@
 # In between every I am alive! message, the program should pause for 2 seconds 
 
 pid_file="/var/run/my_process.pid"
-output_file="/tmp/my_process"
 
 start_process() {
     if [ -f "$pid_file" ]; then
