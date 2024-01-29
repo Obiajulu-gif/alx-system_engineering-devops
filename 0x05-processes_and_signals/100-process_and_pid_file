@@ -6,8 +6,8 @@ cleanup() {
     exit 0
 }
 
-trap 'cleanup' SIGTERM
-trap 'cleanup' SIGINT
+trap 'cleanup' SIGQUIT SIGTERM
+trap 'echo "Y U no love me?!"; cleanup' SIGINT
 trap 'echo "I hate the kill command"; cleanup' SIGTERM
 
 echo "$$" > "$pid_file"
