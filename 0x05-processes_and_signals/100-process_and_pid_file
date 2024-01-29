@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+# script that creates the file 
+pid_file="/var/run/myscript.pid"
+cleanup() {
+    rm -f "$pid_file"
+    exit 0
+}
+
+trap 'cleanup' SIGTERM
+trap 'cleanup' SIGINT
+trap 'echo "I hate the kill command"; cleanup' SIGTERM
+
+echo "$$" > "$pid_file"
+
+while true; do
+    echo "To infinity and beyond"
+    sleep 2
+done
