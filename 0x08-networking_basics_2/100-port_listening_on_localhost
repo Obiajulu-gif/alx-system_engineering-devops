@@ -2,7 +2,7 @@
 
 # This script will show the ports listening on localhost
 if [ "$(id -u)" != "0" ]; then
-    echo "This script must be run as root" 1>&2
+    echo "This script must be run as root"
     exit 1
 fi
 
