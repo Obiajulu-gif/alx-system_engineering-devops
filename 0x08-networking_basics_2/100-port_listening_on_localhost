@@ -6,4 +6,4 @@ if [ "$(id -u)" != "0" ]; then
     exit 1
 fi
 
-netstat -tuln
+nc -l 127.0.0.2 98
