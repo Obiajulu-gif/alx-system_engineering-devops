@@ -1,3 +1,4 @@
-#!/usr/bin/env bash
-# Load the .bashrc file
+#!/bin/bash
+
+# Load the .bashrc fi
 source ~/.bashrc
