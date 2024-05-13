@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# Load the .bashrc file
+source ~/.bashrc
