@@ -1,3 +1,4 @@
+
 global
         log /dev/log    local0
         log /dev/log    local1 notice
@@ -8,7 +9,7 @@ global
         group haproxy
         daemon
 
-        # Default SSL material locations 
+        # Default SSL material locations
         ca-base /etc/ssl/certs
         crt-base /etc/ssl/private
 
@@ -33,22 +34,19 @@ defaults
         errorfile 503 /etc/haproxy/errors/503.http
         errorfile 504 /etc/haproxy/errors/504.http
 
-#--emmanuelokoye.tech-params-begin--
-backend emmanuelokoye.tech-backend
+frontend emmanuelokoye-frontend
+        bind *:80
+        mode http
+        http-request redirect scheme https code 301 unless { ssl_fc }
+        http-request set-header X_Forwarded-Proto http
+        default_backend emmanuelokoye-backend
+
+frontend emmanuelokoye-frontend-https
+        bind *:443 ssl crt /etc/haproxy/certs/emmanuelokoye.tech.pem
+        http-request set-header X-Forwarded-Proto https
+        default_backend emmanuelokoye-backend
+
+backend emmanuelokoye-backend
         balance roundrobin
         server 502689-web-01 54.227.199.18:80 check
         server 502689-web-02 35.168.7.35:80 check
-
-frontend emmanuelokoye-frontend
-    bind *:80
-    mode http
-    http-request redirect scheme https code 301 unless { ssl_fc }
-    http-request set-header X_Forwarded-Proto http
-    default_backend emmanuelokoye.tech-backend
-
-frontend emmanuelokoye-frontend-https
-    bind *:443 ssl crt /etc/haproxy/certs/www.emmanuelokoye.tech.pem
-    http-request set-header X-Forwarded-Proto https
-    default_backend emmanuelokoye.tech-backend
-
-#--emmanuelokoye.tech-params-end--
