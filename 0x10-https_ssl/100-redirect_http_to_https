@@ -1,16 +1,13 @@
-global
+
+bal
         log /dev/log    local0
         log /dev/log    local1 notice
         chroot /var/lib/haproxy
-        stats socket /run/haproxy/admin.sock mode 660 level admin
+        stats socket /run/haproxy/admin.sock mode 660 level admin expose-fd listeners     
         stats timeout 30s
         user haproxy
         group haproxy
         daemon
-        
-        # New commands
-        maxconn 2048
-        tune.ssl.default-dh-param 2048
 
         # Default SSL material locations
         ca-base /etc/ssl/certs
@@ -29,23 +26,30 @@ defaults
         timeout connect 5000
         timeout client  50000
         timeout server  50000
-        
-	# New commands
-        option forwardfor
-        option http-server-close
+        errorfile 400 /etc/haproxy/errors/400.http
+        errorfile 403 /etc/haproxy/errors/403.http
+        errorfile 408 /etc/haproxy/errors/408.http
+        errorfile 500 /etc/haproxy/errors/500.http
+        errorfile 502 /etc/haproxy/errors/502.http
+        errorfile 503 /etc/haproxy/errors/503.http
+        errorfile 504 /etc/haproxy/errors/504.http
 
-frontend besthor_front_end
+#--emmanuelokoye.tech-params-begin--
+backend emmanuelokoye.tech-backend
+        balance roundrobin
+        server 502689-web-01 54.227.199.18:80 check
+        server 502689-web-02 35.168.7.35:80 check
+
+frontend emmanuelokoye-frontend
     bind *:80
-    bind *:443 ssl crt /etc/haproxy/certs/www.besthor.tech.pem
-    http-request redirect scheme https unless { ssl_fc }
+    mode http
+    http-request redirect scheme https code 301 unless { ssl_fc }
+    http-request set-header X_Forwarded-Proto http
+    default_backend emmanuelokoye.tech-backend
+
+frontend emmanuelokoye-frontend-https
+    bind *:443 ssl crt /etc/haproxy/certs/www.emmanuelokoye.tech.pem
     http-request set-header X-Forwarded-Proto https
-    default_backend besthor_back_end
+    default_backend emmanuelokoye.tech-backend
 
-backend besthor_back_end
-    balance roundrobin
-    
-    server 176572-web-01 54.165.168.252:80 check
-    server 176572-web-02 54.236.45.234:80  check
-
-backend letsencrypt-backend
-    server letsencrypt 127.0.0.1:54321
+#--emmanuelokoye.tech-params-end--
