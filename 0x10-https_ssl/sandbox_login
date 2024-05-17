@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+sshpass -p 7dc2af0a4d6c6c4ddf08 ssh 4f5bec04e27b@4f5bec04e27b.41728a5a.alx-cod.online
