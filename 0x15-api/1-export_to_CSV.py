@@ -34,7 +34,7 @@ if __name__ == '__main__':
     todos = todo_response.json()
 
     # Extract relevant data
-    EMPLOYEE_NAME = user.get("username")  # Corrected to fetch username
+    EMPLOYEE_NAME = user.get("username")
     USER_ID = user.get("id")
     TASKS = [{"username": EMPLOYEE_NAME,
               "task": todo.get("title"),
