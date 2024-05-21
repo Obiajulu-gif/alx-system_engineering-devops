@@ -49,7 +49,7 @@ if __name__ == '__main__':
     for task in completed_tasks:
         print("\t {}".format(task))
 
-    # Export CSV
+    # Export CSV  
     csv_filename = "{}.csv".format(USER_ID)
     with open(csv_filename, mode='w', newline='') as file:
         writer = csv.writer(file, quoting=csv.QUOTE_ALL)
