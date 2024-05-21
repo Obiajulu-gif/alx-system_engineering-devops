@@ -6,9 +6,9 @@ returns information about his/her TODO list progress
 and exports it to a CSV file.
 """
 
-import csv
-import requests
 import sys
+import requests
+import csv
 
 if __name__ == '__main__':
     if len(sys.argv) != 2:
@@ -34,7 +34,7 @@ if __name__ == '__main__':
     todos = todo_response.json()
 
     # Extract relevant data
-    EMPLOYEE_NAME = user.get("username")  # Corrected to fetch username
+    EMPLOYEE_NAME = user.get("name")
     USER_ID = user.get("id")
     TASKS = [{"username": EMPLOYEE_NAME,
               "task": todo.get("title"),
@@ -44,17 +44,17 @@ if __name__ == '__main__':
     total_tasks = len(TASKS)
     completed_count = len(completed_tasks)
 
-    print("Employee {} is done with tasks({}/{}):".format(
-        EMPLOYEE_NAME, completed_count, total_tasks))
+    print("Employee {} is done with tasks({}/{}):".format(EMPLOYEE_NAME,
+                                                          completed_count,
+                                                          total_tasks))
     for task in completed_tasks:
         print("\t {}".format(task))
-
-    # Export CSV  
+    # Export CSV
     csv_filename = "{}.csv".format(USER_ID)
     with open(csv_filename, mode='w', newline='') as file:
         writer = csv.writer(file, quoting=csv.QUOTE_ALL)
         for task in TASKS:
             writer.writerow([USER_ID, task["username"],
-                             task["completed"], task["task"]])
+                            task["completed"], task["task"]])
 
     print(f"Data exported to {csv_filename}")
