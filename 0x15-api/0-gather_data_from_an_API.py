@@ -9,10 +9,10 @@ returns information about his/her TODO list progress.
 import requests
 import sys
 
-
 if __name__ == '__main__':
     if len(sys.argv) != 2:
         print("Usage: python script_name.py <employee_id>")
+        sys.exit(1)
 
     employee_id = int(sys.argv[1])
     url = "https://jsonplaceholder.typicode.com"
