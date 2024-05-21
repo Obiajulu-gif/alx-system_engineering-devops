@@ -58,4 +58,4 @@ if __name__ == '__main__':
             writer.writerow([USER_ID, task["username"],
                             task["completed"], task["task"]])
 
-    print(f"Data exported to {csv_filename}")
+    print(f"Number of tasks in CSV: {csv_filename}")
