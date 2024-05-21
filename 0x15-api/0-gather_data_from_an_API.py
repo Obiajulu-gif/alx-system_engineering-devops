@@ -8,14 +8,18 @@ import requests
 import sys
 
 
-def get_employee_todo_progress(employee_id):
+if __name__ == '__main__':
+    if len(sys.argv) != 2:
+        print("Usage: python script_name.py <employee_id>")
+
+    employee_id = int(sys.argv[1])
     url = "https://jsonplaceholder.typicode.com"
 
     user_url = "{}/users/{}".format(url, employee_id)
     user_response = requests.get(user_url)
     if user_response.status_code != 200:
         print("Failed to retrieve data for employee {}".format(employee_id))
-        return
+
     params = {"userId": employee_id}
 
     todo_url = "{}/todos".format(url)
@@ -36,12 +40,3 @@ def get_employee_todo_progress(employee_id):
                                                           total_task))
     for task in complete:
         print("\t {}".format(task))
-
-
-if __name__ == '__main__':
-    if len(sys.argv) != 2:
-        print("Usage: python script_name.py <employee_id>")
-
-    employee_id = int(sys.argv[1])
-
-    get_employee_todo_progress(employee_id)
