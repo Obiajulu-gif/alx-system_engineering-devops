@@ -44,9 +44,8 @@ if __name__ == '__main__':
     total_tasks = len(TASKS)
     completed_count = len(completed_tasks)
 
-    print("Employee {} is done with tasks({}/{}):".format(EMPLOYEE_NAME,
-                                                          completed_count,
-                                                          total_tasks))
+    print("Employee {} is done with tasks({}/{}):".format(
+        EMPLOYEE_NAME, completed_count, total_tasks))
     for task in completed_tasks:
         print("\t {}".format(task))
 
@@ -56,6 +55,6 @@ if __name__ == '__main__':
         writer = csv.writer(file, quoting=csv.QUOTE_ALL)
         for task in TASKS:
             writer.writerow([USER_ID, task["username"],
-                            task["completed"], task["task"]])
+                             task["completed"], task["task"]])
 
     print(f"Data exported to {csv_filename}")
