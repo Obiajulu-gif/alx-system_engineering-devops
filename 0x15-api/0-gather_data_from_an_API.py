@@ -12,17 +12,17 @@ import sys
 
 if __name__ == '__main__':
     if len(sys.argv) != 2:
-        print("Usage: python script_name.py <EMPLOYEE_NAME>")
+        print("Usage: python script_name.py <employee_id>")
 
-    EMPLOYEE_NAME = int(sys.argv[1])
+    employee_id = int(sys.argv[1])
     url = "https://jsonplaceholder.typicode.com"
 
-    user_url = "{}/users/{}".format(url, EMPLOYEE_NAME)
+    user_url = "{}/users/{}".format(url, employee_id)
     user_response = requests.get(user_url)
     if user_response.status_code != 200:
-        print("Failed to retrieve data for employee {}".format(EMPLOYEE_NAME))
+        print("Failed to retrieve data for employee {}".format(employee_id))
 
-    params = {"userId": EMPLOYEE_NAME}
+    params = {"userId": employee_id}
 
     todo_url = "{}/todos".format(url)
 
@@ -36,9 +36,10 @@ if __name__ == '__main__':
                   if todo.get("completed") is True]
     NUMBER_OF_DONE_TASKS = len(todos)
     TOTAL_NUMBER_OF_TASKS = len(TASK_TITLE)
+    EMPLOYEE_NAME = user.get("name")
 
     print("Employee {} is done with tasks({}/{}):"
-          .format(user.get("name"),
+          .format(EMPLOYEE_NAME,
                   TOTAL_NUMBER_OF_TASKS,
                   NUMBER_OF_DONE_TASKS))
     for task in TASK_TITLE:
