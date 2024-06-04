@@ -5,13 +5,16 @@
 import requests
 import re
 
+MAX_DEPTH = 10
+
 
 def count_words(
         subreddit,
         word_list,
         hot_list=None,
         after=None,
-        word_count={}):
+        word_count={},
+        depth=0):
     """
     Queries the Reddit API, parses the title of all hot articles,
     and prints a sorted count of given keywords.
@@ -21,7 +24,7 @@ def count_words(
     if word_count == {}:
         word_count = {word.lower(): 0 for word in word_list}
 
-    url = f"https://www.reddit.com/r/{subreddit}/hot.json"
+    url = "https://www.reddit.com/r/{}/hot.json".format(subreddit)
     headers = {"User-Agent": "My Reddit API Client"}
     params = {"limit": 100}
     if after:
@@ -50,12 +53,14 @@ def count_words(
                 word_count[word_lower] += count
 
         if data["data"]["after"]:
-            count_words(
-                subreddit,
-                word_list,
-                hot_list,
-                data["data"]["after"],
-                word_count)
+            if depth < MAX_DEPTH:
+                count_words(
+                    subreddit,
+                    word_list,
+                    hot_list,
+                    data["data"]["after"],
+                    word_count,
+                    depth + 1)
         else:
             sorted_word_count = sorted(
                 word_count.items(), key=lambda x: (-x[1], x[0]))
