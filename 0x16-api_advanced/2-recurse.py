@@ -1,29 +1,16 @@
 #!/usr/bin/python3
-"""
-2-recurse
-"""
+"""Function to query subscribers on a given Reddit subreddit."""
 import requests
 
 
-def recurse(subreddit, hot_list=[], after=None):
-    """
-    Returns a list of hot article titles for a given subreddit.
-    If no results are found, returns None.
-    """
-    url = "https://www.reddit.com/r/{}/hot.json".format(subreddit)
-    headers = {"User-Agent": "My Reddit API Client"}
-    params = {"limit": 100}
-    if after:
-        params["after"] = after
-
-    response = requests.get(
-        url,
-        headers=headers,
-        params=params,
-        allow_redirects=False)
-
-    if response.status_code == 200:
-        data = response.json()
-        hot_list.extend([post["data"]["title"]
-                        for post in data["data"]["children"]])
-    return hot_list
+def number_of_subscribers(subreddit):
+    """Return the total number of subscribers on a given subreddit."""
+    url = "https://www.reddit.com/r/{}/about.json".format(subreddit)
+    headers = {
+        "User-Agent": "linux:0x16.api.advanced:v1.0.0 (by /u/bdov_)"
+    }
+    response = requests.get(url, headers=headers, allow_redirects=False)
+    if response.status_code == 404:
+        return 0
+    results = response.json().get("data")
+    return results.get("subscribers")
