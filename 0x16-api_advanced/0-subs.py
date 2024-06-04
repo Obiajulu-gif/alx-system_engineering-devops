@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-0-sub task 
+0-sub task
 """
 
 import requests
