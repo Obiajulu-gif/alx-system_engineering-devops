@@ -1,9 +1,9 @@
 #!/bin/bash
 
-# ensure the script exits on any error
+# ensure the script exits on any error.
 set -e
 
-# Check for yarn installation
+# Check for yarn installation.
 if ! command -v yarn &> /dev/null
 then
     echo "yarn could not be found, please install it first."
